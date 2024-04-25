@@ -16,10 +16,10 @@ async function conecta()
     comida = await db.collection("comida");
     porcao = await db.collection("porcao");
 }
-async function inserte(id, ml,imagem, composicao)
+async function inserte()
 {
     try {
-        let a = await porcao.insertOne({_id:'coca', ml:350, imagem:'f', composicao:'Refrigerante'});
+        let a = await bebida.insertOne({_id:'coca', ml:350, imagem:'f', composicao:'Refrigerante'});
         let c = await bebida.insertOne({_id:'suco', ml:360, imagem:'f', composicao:'agua e tang'});
         let d = await comida.insertOne({_id:'ISCAS DE FRANGO AO MOLHO SUGO', para_pessoa:2, imagem:'f', composicao:'FILÉ DE PEITO DE FRANGO, MOLHO DE TOMTE NATURAL E TEMPEROS NATURAIS;ARROZ;FEIJÃO'});
         let i = await comida.insertOne({_id:'CARNE DE PANELA', para_pessoa:2, imagem:'f', composicao:'CARNE BOVINA E TEMPEROS NATURAIS;ARROZ;FEIJÃO'});
