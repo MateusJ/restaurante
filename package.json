@@ -7,9 +7,18 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "express": "^4.19.2",
     "mongodb": "^6.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MateusJ/restaurante.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MateusJ/restaurante/issues"
+  },
+  "homepage": "https://github.com/MateusJ/restaurante#readme",
+  "devDependencies": {},
+  "description": ""
 }
