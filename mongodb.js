@@ -2,11 +2,6 @@ const {
     MongoClient
 } = require('mongodb');
 
-var db;
-var bebida;
-var comida;
-var porcao;
-
 async function conecta()
 {
     var client = new MongoClient('mongodb://127.0.0.1:27017');
@@ -47,19 +42,16 @@ async function consulta ()
 async function init()
 {
     await conecta();
-    console.log("Insere um registro");
+    // console.log("Insere um registro");
 
     await inserte();
-    console.log("Consulta para ver se foi inserido");
-    await consulta();
-    console.log("Remove o registro");
-    console.log("Consulta para ver se foi removido");
+    // console.log("Consulta para ver se foi inserido");
     // await consulta();
     var categorias = await db.listCollections().toArray();
     categorias = categorias.map(cat => cat.name);
-    console.log (categorias);
+
+    return categorias;
 }
 
-init();
 
-module.exports = init;
+module.exports = {init, consulta};

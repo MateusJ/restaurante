@@ -3,6 +3,8 @@ var app = express();
 const path = require('path');
 var mongo = require("./mongodb");
 
+var categorias;
+mongo.init().then(cats => categorias = cats)
 
 app.use(express.static(__dirname + '/public'));
 
@@ -12,7 +14,8 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/categorias', function(req, resp) {
-        resp.sendFile(path.join(__dirname, '/public/categorias.html'));
+        console.log(categorias);
+        resp.end();
 });
 
 
