@@ -46,9 +46,10 @@
         }
         .box{
             background-color: black;
-            width: 33%;
+            width: 200px;
             height: 100px;
             margin: 10px;
+            color:white;
         }
     </style>
 </head>
@@ -62,9 +63,11 @@
             <p>Escolha uma opção do nosso menu:</p>
         </section>
         <section class="container">
-            <div class="box"></div>
-            <div class="box"></div>
-            <div class="box"></div>
+            <span v-for="cat in categorias">
+                <div class="box">
+                    {{cat}}
+                </div>
+            </span>
         </section>
         <footer>
             &copy; 2024 {{ restaurantName }}. Todos os direitos reservados.
@@ -76,7 +79,12 @@
             el: '#app',
             data: {
                 restaurantName: 'Nome do Restaurante',
+                categorias: []
+            },
+            async created(){
+                let cats = await fetch('http://localhost:3000/categorias');
                 
+                this.categorias = await cats.json();
             }
         });
     </script>

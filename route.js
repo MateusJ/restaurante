@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/categorias', function(req, resp) {
-        console.log(categorias);
+        resp.send(categorias);
         resp.end();
 });
 
