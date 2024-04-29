@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/categorias', function(req, resp) {
-        // resp.send(alunos);
+        document.write('<div>testetesaosfjoasifhoasifhsaofh</div>')
 });
 
 

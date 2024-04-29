@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #666;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>{{ restaurantName }}</h1>
+        </header>
+        <nav>
+            <a href="#" v-for="item in menuItems" :key="item.id">{{ item.name }}</a>
+        </nav>
+        <section>
+            <h2>Bem-vindo ao nosso restaurante!</h2>
+            <p>Escolha uma opção do nosso menu:</p>
+        </section>
+        <footer>
+            &copy; 2024 {{ restaurantName }}. Todos os direitos reservados.
+        </footer>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                restaurantName: 'Nome do Restaurante',
+                menuItems: [
+                    { id: 1, name: 'Comida' },
+                    { id: 2, name: 'Bebida' },
+                    { id: 3, name: 'Porções' }
+                ]
+            }
+        });
+    </script>
+</body>
+</html>
