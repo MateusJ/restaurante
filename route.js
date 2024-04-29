@@ -1,5 +1,7 @@
-var express = require('express')
+var express = require('express');
 var app = express();
+const path = require('path');
+var mongo = require("./mongodb");
 
 
 app.use(express.static(__dirname + '/public'));
@@ -10,7 +12,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/categorias', function(req, resp) {
-        document.write('<div>testetesaosfjoasifhoasifhsaofh</div>')
+        resp.sendFile(path.join(__dirname, '/public/categorias.html'));
 });
 
 

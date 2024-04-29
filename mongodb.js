@@ -56,7 +56,10 @@ async function init()
     console.log("Consulta para ver se foi removido");
     // await consulta();
     var categorias = await db.listCollections().toArray();
-    categorias.map(cat => console.log(cat.name));
+    categorias = categorias.map(cat => cat.name);
+    console.log (categorias);
 }
 
 init();
+
+module.exports = init;
