@@ -34,10 +34,15 @@ async function remove()
         console.log (e);
     }
 }
-async function consulta ()
+async function consulta (categoria)
 {
-    let a = await porcao.find( {} ).toArray();
-    console.log(a);
+    var client = new MongoClient('mongodb://127.0.0.1:27017');
+    await client.connect();
+    db = await client.db("RESTAURANTE");
+    a = await db.collection(categoria);
+    let b = await a.find( {} ).toArray();
+    b = b.map(c => c._id)
+    return b;
 }
 async function init()
 {
