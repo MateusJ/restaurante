@@ -22,6 +22,15 @@ app.get('/itensCategoria/:categoria', async function(req, resp) {
     resp.end();
  });
 
+ app.get('/itensCategoria/:categoria/:item', async function(req, resp) {
+    var categoria = req.params.categoria;
+    var item = req.params.item;
+    var detalhes = await mongo.detalhes(categoria, item);
+    resp.send(detalhes);
+    resp.end();
+ });
+
+
 
 app.get(/^(.+)$/, function(req, res) {
     try {

@@ -72,7 +72,7 @@
             </div>
         </section>
         <section class="itens">
-            <div class="list" v-for="item in itens">
+            <div class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
                 {{item}}
             </div>
         </section>
@@ -87,19 +87,26 @@
             data: {
                 restaurantName: 'Nome do Restaurante',
                 categorias: [],
-                itens: []
+                itens: [],
+                categoriaSelecionada: '',
+                detalhes: ''
             },
             async created(){
                 let cats = await fetch('http://localhost:3000/categorias');
-                
                 this.categorias = await cats.json();
             },
             methods:{
                 getCategoria: async function(i){
                     let itens = await fetch('/itensCategoria/' + i);
-                
+                    this.categoriaSelecionada = i;
                     this.itens = await itens.json();
                     // document.getElementById("categorias").style.display = "none";
+                },
+
+                getDetalhes: async function(item){
+                    let itens = await fetch('/itensCategoria/' + this.categoriaSelecionada + '/' + item);
+                    this.detalhes = await itens.text();
+                    console.log(this.detalhes);
                 }
             }
         });

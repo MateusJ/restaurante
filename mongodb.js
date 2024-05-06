@@ -41,6 +41,7 @@ async function consulta (categoria)
     db = await client.db("RESTAURANTE");
     a = await db.collection(categoria);
     let b = await a.find( {} ).toArray();
+    console.log(b);
     b = b.map(c => c._id)
     return b;
 }
@@ -57,6 +58,16 @@ async function init()
 
     return categorias;
 }
+async function detalhes(categoria, item){
+
+    var client = new MongoClient('mongodb://127.0.0.1:27017');
+    await client.connect();
+    db = await client.db("RESTAURANTE");
+    todosItens = await db.collection(categoria);
+    detalheItem = await todosItens.findOne({_id:item}, {projection: {_id: 0,composicao:1}});
+    return detalheItem.composicao;
+
+}
 
 
-module.exports = {init, consulta};
+module.exports = {init, consulta, detalhes};
