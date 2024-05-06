@@ -44,32 +44,24 @@
         .categorias{
             display:flex;
         }
-        .box_porcao{
+        .box{
             background-color: #333;
             padding: 100px;
             width: 33%;
-            
+            background-repeat: no-repeat;
+            background-size: 100%;
             margin: 10px;
             color:white;
             text-transform: capitalize;
         }
-        .box_bebida{
-            background-color: #333;
-            padding: 100px;
-            width: 33%;
-            
-            margin: 10px;
-            color:white;
-            text-transform: capitalize;
+        #box_porcao{
+            background-image: url(categoria_porcao.jpg); 
         }
-        .box_comida{
-            background-color: #333;
-            padding: 100px;
-            width: 33%;
-            
-            margin: 10px;
-            color:white;
-            text-transform: capitalize;
+        #box_comida{            
+            background-image: url(categoria_comida.jpg);
+        }
+        #box_bebida{            
+            background-image: url(categoria_bebida.jpg);
         }
         .list{
             text-transform: capitalize;
@@ -86,7 +78,7 @@
             <p>Escolha uma opção do nosso menu:</p>
         </section>
         <section class="categorias" id="categorias">
-            <div v-for="cat in categorias" v-on:click="getCategoria(cat)" :class="'box_'+ cat">
+            <div class="box" v-for="cat in categorias" v-on:click="getCategoria(cat)" :id="'box_'+ cat">
                 {{cat}}
             </div>
         </section>
@@ -100,6 +92,7 @@
                 {{detalhes}}
             </div>
         </section>
+        <div style="height: 50px;"></div>
         <footer>
             &copy; 2024 {{ restaurantName }}. Todos os direitos reservados.
         </footer>
@@ -116,7 +109,7 @@
                 detalhes: ''
             },
             async created(){
-                let cats = await fetch( 'http://localhost:3000/categorias');
+                let cats = await fetch('http://localhost:3000/categorias');
                 this.categorias = await cats.json();
             },
             methods:{
@@ -132,7 +125,6 @@
                     this.detalhes = await itens.text();
                     console.log(this.detalhes);
                 }
-                
             }
         });
     </script>
