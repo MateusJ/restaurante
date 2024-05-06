@@ -44,10 +44,29 @@
         .categorias{
             display:flex;
         }
-        .box{
+        .box_porcao{
             background-color: #333;
+            padding: 100px;
             width: 33%;
-            height: 100px;
+            
+            margin: 10px;
+            color:white;
+            text-transform: capitalize;
+        }
+        .box_bebida{
+            background-color: #333;
+            padding: 100px;
+            width: 33%;
+            
+            margin: 10px;
+            color:white;
+            text-transform: capitalize;
+        }
+        .box_comida{
+            background-color: #333;
+            padding: 100px;
+            width: 33%;
+            
             margin: 10px;
             color:white;
             text-transform: capitalize;
@@ -67,13 +86,18 @@
             <p>Escolha uma opção do nosso menu:</p>
         </section>
         <section class="categorias" id="categorias">
-            <div class="box" v-for="cat in categorias" v-on:click="getCategoria(cat)">
+            <div v-for="cat in categorias" v-on:click="getCategoria(cat)" :class="'box_'+ cat">
                 {{cat}}
             </div>
         </section>
         <section class="itens">
             <div class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
                 {{item}}
+            </div>
+        </section>
+        <section class="detalhes">
+            <div class="list">
+                {{detalhes}}
             </div>
         </section>
         <footer>
@@ -92,7 +116,7 @@
                 detalhes: ''
             },
             async created(){
-                let cats = await fetch('http://localhost:3000/categorias');
+                let cats = await fetch( 'http://localhost:3000/categorias');
                 this.categorias = await cats.json();
             },
             methods:{
@@ -108,6 +132,7 @@
                     this.detalhes = await itens.text();
                     console.log(this.detalhes);
                 }
+                
             }
         });
     </script>
