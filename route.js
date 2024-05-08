@@ -34,7 +34,7 @@ app.get('/itensCategoria/:categoria', async function(req, resp) {
 
 app.get(/^(.+)$/, function(req, res) {
     try {
-        res.write("A pagina que vc busca nao existe")
+        res.write("Esta página não existe")
         res.end();
     } catch (e) {
         res.end();

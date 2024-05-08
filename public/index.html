@@ -45,23 +45,26 @@
             display:flex;
         }
         .box{
-            background-color: #333;
             padding: 100px;
             width: 33%;
             background-repeat: no-repeat;
             background-size: 100%;
             margin: 10px;
-            color:white;
+            color:black;
             text-transform: capitalize;
+            max-height: 50px;
         }
         #box_porcao{
             background-image: url(categoria_porcao.jpg); 
+            color: white
         }
         #box_comida{            
             background-image: url(categoria_comida.jpg);
+            color: white
         }
         #box_bebida{            
             background-image: url(categoria_bebida.jpg);
+            color: white
         }
         .list{
             text-transform: capitalize;
@@ -82,12 +85,12 @@
                 {{cat}}
             </div>
         </section>
-        <section class="itens">
+        <section class="itens box" id="itens">
             <div class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
                 {{item}}
             </div>
         </section>
-        <section class="detalhes">
+        <section id="detalhes" class="detalhes box">
             <div class="list">
                 {{detalhes}}
             </div>
@@ -113,11 +116,40 @@
                 this.categorias = await cats.json();
             },
             methods:{
+                // getReorder: function(categoria){
+                //     console.log(categorias)
+
+                // },
+
                 getCategoria: async function(i){
                     let itens = await fetch('/itensCategoria/' + i);
                     this.categoriaSelecionada = i;
                     this.itens = await itens.json();
-                    // document.getElementById("categorias").style.display = "none";
+                    var porcao = document.getElementById("box_porcao");
+                    var comida = document.getElementById("box_comida");
+                    var bebida = document.getElementById("box_bebida");
+
+                    porcao.parentNode.insertBefore(document.getElementById("box_" + i), porcao);
+                    
+                    if(i == "porcao"){
+                        comida.parentNode.insertBefore(document.getElementById("itens"),comida);
+                        comida.parentNode.insertBefore(document.getElementById("detalhes"),comida);
+                        comida.style.color = "Black"
+                        comida.remove();
+                        bebida.remove();
+                        
+                    }else {
+                        porcao.parentNode.insertBefore(document.getElementById("itens"),porcao);
+                        porcao.parentNode.insertBefore(document.getElementById("detalhes"),porcao);
+                        porcao.style.color = "Black"
+                        for(let j = 0; j < this.categorias.length; j++){
+                            if(this.categorias[j] != i){
+                                document.getElementById("box_" + this.categorias[j]).remove();
+                            }
+                        }
+                    }
+
+                    // getReorder(i);
                 },
 
                 getDetalhes: async function(item){
