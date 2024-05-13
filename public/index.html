@@ -56,18 +56,43 @@
         }
         #box_porcao{
             background-image: url(categoria_porcao.jpg); 
-            color: white
+            color: white;
+            height: 100px;
         }
         #box_comida{            
             background-image: url(categoria_comida.jpg);
-            color: white
+            color: white;
+            height: 100px;
         }
         #box_bebida{            
             background-image: url(categoria_bebida.jpg);
-            color: white
+            color: white;
+            height: 100px;
         }
         .list{
             text-transform: capitalize;
+            list-style: none;
+            
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .list li{
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .boxLista{
+            padding-left: 100px;
+            padding-right: 100px;
+            width: 33%;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            margin: 10px;
+            color:black;
+            text-transform: capitalize;
+            max-height: 50px;
         }
     </style>
 </head>
@@ -85,15 +110,15 @@
                 {{cat}}
             </div>
         </section>
-        <section class="itens box" id="itens">
-            <div class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
-                {{item}}
-            </div>
+        <section class="itens boxLista" id="itens">
+            <ul class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
+                <li>{{item}}</li>
+            </ul>
         </section>
-        <section id="detalhes" class="detalhes box">
-            <div class="list">
-                {{detalhes}}
-            </div>
+        <section id="detalhes" class="detalhes boxLista">
+            <ul class="list">
+                <li>{{detalhes}}</li>
+            </ul>
         </section>
         <div style="height: 50px;"></div>
         <footer>
