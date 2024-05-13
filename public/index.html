@@ -53,6 +53,7 @@
             color:black;
             text-transform: capitalize;
             max-height: 50px;
+            cursor: pointer;
         }
         #box_porcao{
             background-image: url(categoria_porcao.jpg); 
@@ -93,7 +94,21 @@
             color:black;
             text-transform: capitalize;
             max-height: 50px;
+            visibility: hidden;
         }
+        button {
+        margin-left: 10px;
+        margin-bottom: 45px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        outline: none;
+        visibility: hidden;
+    }
     </style>
 </head>
 <body>
@@ -112,7 +127,7 @@
         </section>
         <section class="itens boxLista" id="itens">
             <ul class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
-                <li>{{item}}</li>
+                <li style="cursor: pointer">{{item}}</li>
             </ul>
         </section>
         <section id="detalhes" class="detalhes boxLista">
@@ -120,7 +135,14 @@
                 <li>{{detalhes}}</li>
             </ul>
         </section>
-        <div style="height: 50px;"></div>
+        <div>
+            <button id="button" onclick="reloadPage()">Voltar as Categorias</button>
+        </div>
+        <script>
+            function reloadPage() {
+                location.reload();
+            }
+        </script>
         <footer>
             &copy; 2024 {{ restaurantName }}. Todos os direitos reservados.
         </footer>
@@ -141,11 +163,6 @@
                 this.categorias = await cats.json();
             },
             methods:{
-                // getReorder: function(categoria){
-                //     console.log(categorias)
-
-                // },
-
                 getCategoria: async function(i){
                     let itens = await fetch('/itensCategoria/' + i);
                     this.categoriaSelecionada = i;
@@ -173,14 +190,14 @@
                             }
                         }
                     }
-
-                    // getReorder(i);
+                    document.getElementById("button").style.visibility = "visible";
+                    document.getElementById("itens").style.visibility = "visible";
                 },
 
                 getDetalhes: async function(item){
                     let itens = await fetch('/itensCategoria/' + this.categoriaSelecionada + '/' + item);
                     this.detalhes = await itens.text();
-                    console.log(this.detalhes);
+                    document.getElementById("detalhes").style.visibility = "visible";
                 }
             }
         });
