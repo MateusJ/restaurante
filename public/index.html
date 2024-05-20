@@ -125,16 +125,17 @@
                 {{cat}}
             </div>
         </section>
-        <section class="itens boxLista" id="itens">
+        <div class="itens boxLista" id="itens">
             <ul class="list" v-for="item in itens" v-on:click="getDetalhes(item)">
                 <li style="cursor: pointer">{{item}}</li>
             </ul>
-        </section>
-        <section id="detalhes" class="detalhes boxLista">
+        </div>
+        <div id="detalhes" class="detalhes boxLista">
+            <img :src="detalheImagem" alt="Detalhes da imagem" style="width:100%; height: auto;">
             <ul class="list">
                 <li>{{detalhes}}</li>
             </ul>
-        </section>
+        </div>
         <div>
             <button id="button" onclick="reloadPage()">Voltar as Categorias</button>
         </div>
@@ -156,7 +157,8 @@
                 categorias: [],
                 itens: [],
                 categoriaSelecionada: '',
-                detalhes: ''
+                detalhes: '',
+                detalheImagem: ''
             },
             async created(){
                 let cats = await fetch('http://localhost:3000/categorias');
@@ -196,7 +198,10 @@
 
                 getDetalhes: async function(item){
                     let itens = await fetch('/itensCategoria/' + this.categoriaSelecionada + '/' + item);
-                    this.detalhes = await itens.text();
+                    let detalhe = await itens.json();
+                    this.detalhes = detalhe.composicao;
+                    this.detalheImagem = detalhe.image;
+                    console.log(detalhe.image)
                     document.getElementById("detalhes").style.visibility = "visible";
                 }
             }

@@ -14,13 +14,13 @@ async function conecta()
 async function inserte()
 {
     try {
-        let a = await bebida.insertOne({_id:'coca', ml:350, imagem:'f', composicao:'Refrigerante'});
-        let c = await bebida.insertOne({_id:'suco', ml:360, imagem:'f', composicao:'agua e tang'});
-        let d = await comida.insertOne({_id:'ISCAS DE FRANGO AO MOLHO SUGO', para_pessoa:2, imagem:'f', composicao:'FILÉ DE PEITO DE FRANGO, MOLHO DE TOMTE NATURAL E TEMPEROS NATURAIS;ARROZ;FEIJÃO'});
-        let i = await comida.insertOne({_id:'CARNE DE PANELA', para_pessoa:2, imagem:'f', composicao:'CARNE BOVINA E TEMPEROS NATURAIS;ARROZ;FEIJÃO'});
-        let f = await porcao.insertOne({_id:'batata frita', para_pessoa:4, imagem:'f', composicao:'batata e sal'});
-        let g = await porcao.insertOne({_id:'tabua', para_pessoa:4, imagem:'f', composicao:'batata frita, calabresa, coração e polenta'});
-        let h = await porcao.insertOne({_id:'aipim frito', para_pessoa:4, imagem:'f', composicao:'aipim'});
+        let a = await bebida.updateOne({_id: 'coca'}, {$set:{image: 'item_coca.png'}});
+        let c = await bebida.updateOne({_id:'suco'}, {$set:{image: 'item_suco.jpg'}});
+        let d = await comida.updateOne({_id:'ISCAS DE FRANGO AO MOLHO SUGO'}, {$set:{image:'item_frango.png'}});
+        let i = await comida.updateOne({_id:'CARNE DE PANELA'}, {$set:{image: 'item_carne.jpg'}});
+        let f = await porcao.updateOne({_id:'batata frita'},{$set:{image: 'item_batata.jpg'}});
+        let g = await porcao.updateOne({_id:'tabua'},{$set:{image: 'item_tabua.jpg'}});
+        let h = await porcao.updateOne({_id:'aipim frito'}, {$set:{image: 'item_aipim.jpg'}});
         } catch (e) {
         console.log (e);
     }
@@ -64,8 +64,8 @@ async function detalhes(categoria, item){
     await client.connect();
     db = await client.db("RESTAURANTE");
     todosItens = await db.collection(categoria);
-    detalheItem = await todosItens.findOne({_id:item}, {projection: {_id: 0,composicao:1}});
-    return detalheItem.composicao;
+    detalheItem = await todosItens.findOne({_id:item}, {projection: {_id: 0,composicao:1, image: 1}});
+    return detalheItem;
 
 }
 
